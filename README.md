@@ -1,0 +1,2 @@
+# pompki
+Zarządzanie treningiem pompek
