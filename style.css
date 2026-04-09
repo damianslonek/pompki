@@ -375,6 +375,14 @@ button:active {
   font-size: 0.86rem;
 }
 
+.app-version {
+  margin: 8px 4px 76px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
 @media (min-width: 720px) {
   .app-shell {
     padding-top: 18px;
@@ -387,5 +395,9 @@ button:active {
     left: auto;
     width: 100%;
     margin-bottom: 14px;
+  }
+
+  .app-version {
+    margin-bottom: 8px;
   }
 }

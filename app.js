@@ -330,7 +330,65 @@ function render() {
   renderEntries();
 }
 
-function addPushups(value) {
+async function requestNotificationPermission() {
+  if (!("Notification" in window)) {
+    return "unsupported";
+  }
+
+  if (Notification.permission === "granted") {
+    return "granted";
+  }
+
+  if (Notification.permission === "denied") {
+    return "denied";
+  }
+
+  try {
+    return await Notification.requestPermission();
+  } catch (_error) {
+    return "denied";
+  }
+}
+
+async function showRemainingGoalNotification() {
+  const goal = Number(data.goal) || 0;
+  if (goal <= 0) return;
+
+  const today = getTodayTotal();
+  const remaining = Math.max(goal - today, 0);
+  if (remaining <= 0) return;
+
+  const permission = await requestNotificationPermission();
+  if (permission !== "granted") return;
+
+  const title = "Pompki - cel dzienny";
+  const body = `Brakuje Ci jeszcze ${remaining} pompek do osiągnięcia dzisiejszego celu!`;
+
+  try {
+    const registration = await navigator.serviceWorker.getRegistration();
+    if (registration) {
+      await registration.showNotification(title, {
+        body,
+        tag: "remaining-goal",
+        renotify: true
+      });
+      return;
+    }
+  } catch (_error) {
+    // Fall back to Notification constructor when SW notification is unavailable.
+  }
+
+  try {
+    new Notification(title, {
+      body,
+      tag: "remaining-goal"
+    });
+  } catch (_error) {
+    // Ignore notification errors in blocked environments.
+  }
+}
+
+async function addPushups(value) {
   const numericValue = Number(value);
 
   if (!Number.isInteger(numericValue) || numericValue <= 0) {
@@ -348,6 +406,7 @@ function addPushups(value) {
   saveData();
   pushupInput.value = "";
   render();
+  await showRemainingGoalNotification();
 }
 
 saveGoalBtn.addEventListener("click", () => {
