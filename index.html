@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1423" />
+  <title>Pompki</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <p id="storageWarning" class="storage-warning" hidden>
+      Uwaga: zapis lokalny jest teraz niedostepny w tej przegladarce.
+    </p>
+    <nav class="tabs" aria-label="Nawigacja">
+      <button class="tab-btn active" data-tab="training">Trening</button>
+      <button class="tab-btn" data-tab="stats">Statystyki</button>
+    </nav>
+
+    <section id="trainingPanel" class="tab-panel active">
+      <article class="card highlight-card">
+        <div class="highlight-head">
+          <p class="muted">Dzisiaj</p>
+          <span id="goalInfo" class="goal-chip">Cel: 100</span>
+        </div>
+        <div>
+          <h2 id="todayTotal">0 pompek</h2>
+        </div>
+        <div>
+          <p id="goalProgress" class="progress-label">Postęp celu: 0%</p>
+          <div class="progress-track" aria-hidden="true">
+            <span id="progressFill" class="progress-fill"></span>
+          </div>
+        </div>
+        <div class="time-meta">
+          <p id="currentTimeInfo" class="time-text">Czas lokalny: --:--:--</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>Dodaj serię</h3>
+        <div class="row">
+          <input id="pushupInput" type="number" min="1" step="1" placeholder="Ile pompek zrobiłeś?" />
+          <button id="addPushupsBtn">Dodaj</button>
+        </div>
+
+        <div class="quick-buttons">
+          <button class="quickAddBtn" data-value="10">+10</button>
+          <button class="quickAddBtn" data-value="20">+20</button>
+          <button class="quickAddBtn" data-value="30">+30</button>
+          <button class="quickAddBtn" data-value="50">+50</button>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="section-head">
+          <h3>Cel dzienny</h3>
+        </div>
+        <div class="row">
+          <input id="goalInput" type="number" min="1" step="1" placeholder="Ustaw cel, np. 120" />
+          <button id="saveGoalBtn">Zapisz</button>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="section-head">
+          <h3>Dzisiejsze wpisy</h3>
+          <button id="clearTodayBtn" class="ghost danger">Wyczyść dzień</button>
+        </div>
+        <ul id="entriesList" class="entries-list"></ul>
+        <p id="emptyState" class="muted">Brak wpisów na dziś.</p>
+      </article>
+    </section>
+
+    <section id="statsPanel" class="tab-panel">
+      <article class="card">
+        <h3>Podsumowanie miesiąca</h3>
+        <div class="month-nav">
+          <button id="prevMonthBtn" class="ghost month-btn" aria-label="Poprzedni miesiąc">←</button>
+          <p id="monthLabel" class="month-label">Bieżący miesiąc</p>
+          <button id="nextMonthBtn" class="ghost month-btn" aria-label="Następny miesiąc">→</button>
+        </div>
+        <div class="stats-grid">
+          <p><span id="monthTotal">0</span><small> łącznie</small></p>
+          <p><span id="monthAverage">0</span><small> średnio / dzień</small></p>
+          <p><span id="activeDays">0</span><small> dni aktywnych</small></p>
+          <p><span id="bestDay">0</span><small> najlepszy dzień</small></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>Postępy każdego dnia</h3>
+        <div id="dailyBars" class="daily-bars"></div>
+        <p id="dailyEmpty" class="muted">Dodaj pierwszy wpis, aby zobaczyć wykres.</p>
+      </article>
+
+      <article class="card totals-card">
+        <p><span id="yearTotal">0</span><small id="yearTotalLabel"> w roku</small></p>
+        <p><span id="allTimeTotal">0</span><small> łącznie od początku</small></p>
+      </article>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

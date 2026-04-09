@@ -1,0 +1,391 @@
+:root {
+  --bg: #060b14;
+  --bg-2: #0b1423;
+  --surface: #101c2f;
+  --surface-soft: #16253b;
+  --text: #edf4ff;
+  --muted: #8ea3bf;
+  --primary: #23c6b5;
+  --primary-dark: #15a99a;
+  --accent: #f59e0b;
+  --danger: #f87171;
+  --border: #26354e;
+  --shadow: 0 14px 36px rgba(0, 0, 0, 0.42);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 10% -10%, #12314c 0, transparent 36%),
+    radial-gradient(circle at 85% 0%, #2e1b38 0, transparent 32%),
+    linear-gradient(180deg, var(--bg), var(--bg-2));
+  min-height: 100vh;
+}
+
+.app-shell {
+  width: min(640px, 100%);
+  margin: 0 auto;
+  padding: 12px 14px 88px;
+}
+
+.storage-warning {
+  margin: 0 0 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(248, 113, 113, 0.45);
+  background: rgba(127, 29, 29, 0.28);
+  color: #fecaca;
+  font-size: 0.84rem;
+}
+
+.tabs {
+  position: fixed;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(620px, calc(100% - 20px));
+  background: rgba(16, 28, 47, 0.9);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 6px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+  z-index: 20;
+}
+
+.tab-btn {
+  border: 0;
+  border-radius: 12px;
+  min-height: 44px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  background: transparent;
+  color: var(--muted);
+}
+
+.tab-btn.active {
+  background: linear-gradient(135deg, #1fb8a8, #159e90);
+  color: #f7fffd;
+}
+
+.tab-panel {
+  display: none;
+  animation: fadeIn 0.22s ease;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  background: rgba(16, 28, 47, 0.86);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 14px;
+  margin-bottom: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.26);
+}
+
+.highlight-card {
+  background: linear-gradient(135deg, #1ab8a9, #0f8f84);
+  color: #f8fffe;
+  border: 0;
+}
+
+.highlight-card .muted,
+.highlight-card .progress-label {
+  color: rgba(248, 255, 254, 0.84);
+}
+
+.highlight-card h2 {
+  margin: 2px 0 10px;
+  font-size: 1.9rem;
+}
+
+.highlight-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.goal-chip {
+  background: rgba(8, 62, 74, 0.32);
+  color: #d7fffa;
+  border: 1px solid rgba(223, 255, 250, 0.38);
+  font-weight: 700;
+  padding: 6px 11px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.progress-track {
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.26);
+  overflow: hidden;
+}
+
+.progress-fill {
+  display: block;
+  height: 100%;
+  width: 0%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #fef08a, #fb923c);
+  transition: width 0.22s ease;
+}
+
+.time-meta {
+  margin-top: 10px;
+  display: grid;
+  gap: 2px;
+}
+
+.time-text {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.25;
+}
+
+h3 {
+  margin: 0 0 10px;
+  font-size: 1.05rem;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+}
+
+input[type="number"] {
+  width: 100%;
+  min-height: 44px;
+  border-radius: 12px;
+  border: 1px solid #344564;
+  background: var(--surface-soft);
+  padding: 10px 12px;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+input[type="number"]::placeholder {
+  color: #7f95b0;
+}
+
+button {
+  border: 0;
+  border-radius: 12px;
+  min-height: 44px;
+  padding: 0 14px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #effffb;
+  background: var(--primary);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+.quick-buttons {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 7px;
+}
+
+.quick-buttons button {
+  background: #223654;
+  color: #bdd1ea;
+}
+
+.quick-buttons button:hover {
+  background: #2d4467;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.ghost {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid #3a4e70;
+}
+
+.danger {
+  color: var(--danger);
+  border-color: rgba(248, 113, 113, 0.45);
+}
+
+.entries-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 0;
+  border-top: 1px solid var(--border);
+}
+
+.entry:first-child {
+  border-top: 0;
+}
+
+.entry strong {
+  font-size: 1rem;
+}
+
+.entry small,
+.muted {
+  color: var(--muted);
+}
+
+.entry button {
+  min-height: 34px;
+  background: transparent;
+  color: var(--danger);
+  border: 1px solid rgba(248, 113, 113, 0.35);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.month-nav {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.month-label {
+  margin: 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 1.02rem;
+  font-weight: 600;
+}
+
+.month-btn {
+  min-height: 36px;
+  min-width: 38px;
+  padding: 0;
+  font-size: 1rem;
+  color: #b7c8dd;
+}
+
+.month-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.totals-card {
+  display: grid;
+  gap: 10px;
+}
+
+.stats-grid p,
+.totals-card p {
+  margin: 0;
+  background: #172842;
+  border-radius: 14px;
+  padding: 10px;
+}
+
+.stats-grid span,
+.totals-card span {
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.stats-grid small,
+.totals-card small {
+  color: var(--muted);
+}
+
+.daily-bars {
+  display: grid;
+  gap: 8px;
+}
+
+.day-bar {
+  display: grid;
+  grid-template-columns: 38px 1fr auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.day-label {
+  font-weight: 700;
+  font-size: 0.86rem;
+  color: var(--muted);
+}
+
+.day-track {
+  height: 11px;
+  border-radius: 999px;
+  background: #263a57;
+  overflow: hidden;
+}
+
+.day-fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+}
+
+.day-value {
+  font-weight: 700;
+  font-size: 0.86rem;
+}
+
+@media (min-width: 720px) {
+  .app-shell {
+    padding-top: 18px;
+  }
+
+  .tabs {
+    position: sticky;
+    top: 10px;
+    transform: none;
+    left: auto;
+    width: 100%;
+    margin-bottom: 14px;
+  }
+}
